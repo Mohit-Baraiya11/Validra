@@ -5,9 +5,15 @@ interface LogoProps {
   className?: string;
   showSubtitle?: boolean;
   size?: "sm" | "md" | "lg";
+  theme?: "light" | "dark" | "auto";
 }
 
-export function Logo({ className, showSubtitle = true, size = "md" }: LogoProps) {
+export function Logo({
+  className,
+  showSubtitle = true,
+  size = "md",
+  theme = "auto",
+}: LogoProps) {
   const iconSizes = {
     sm: "w-7 h-7",
     md: "w-9 h-9",
@@ -19,6 +25,20 @@ export function Logo({ className, showSubtitle = true, size = "md" }: LogoProps)
     md: "text-xl",
     lg: "text-2xl",
   };
+
+  const titleColor =
+    theme === "dark"
+      ? "text-white"
+      : theme === "light"
+      ? "text-slate-900"
+      : "text-slate-900 dark:text-white";
+
+  const subtitleColor =
+    theme === "dark"
+      ? "text-zinc-400"
+      : theme === "light"
+      ? "text-slate-500"
+      : "text-slate-500 dark:text-zinc-400";
 
   return (
     <Link href="/" className={cn("inline-flex items-center gap-2.5 group select-none", className)}>
